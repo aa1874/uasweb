@@ -6,6 +6,9 @@
 
     $stmt2 = $connect->query("SELECT id, title, poster, teaser FROM videos ORDER BY id DESC LIMIT 10");
     $rows2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt3 = $connect->query("SELECT id, title, poster, teaser FROM videos WHERE genre LIKE 'Sci-fi' LIMIT 10");
+    $rows3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,10 +32,10 @@
                     echo '<div class="carousel-item '.$active.'">';
                         echo '<div class="container">';
                             echo '<div class="row">';
-                                echo '<div class="col-sm-2">';
+                                echo '<div class="col-md-2 col-sm-3 col-4">';
                                     echo '<img src="/assets/images/posters/'.$row1["poster"].'" class="img-fluid">';
                                 echo '</div>';
-                                echo '<div class="col-sm-7">';
+                                echo '<div class="col-md-7 col-sm-7 col-8">';
                                     echo '<h1>'.$row1["title"].'</h1>';
                                     echo '<p>'.$row1["teaser"].'</p>';
                                     echo '<p>';
@@ -66,6 +69,23 @@
                     echo '<div class="col-2">';
                         echo '<a href="info.php?id='.$row2["id"].'">';
                             echo '<img src="/assets/images/posters/'.$row2["poster"].'" class="img-fluid">';
+                        echo '</a>';
+                    echo '</div>';
+                }
+                ?>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h3>Fiksi Ilmiah di Nonton.com</h3>
+        <div class="movie-list py-3">
+            <div class="row">
+                <?php
+                foreach ($rows3 as $row3) {
+                    echo '<div class="col-2">';
+                        echo '<a href="info.php?id='.$row3["id"].'">';
+                            echo '<img src="/assets/images/posters/'.$row3["poster"].'" class="img-fluid">';
                         echo '</a>';
                     echo '</div>';
                 }
